@@ -19,7 +19,7 @@ class EmployeeController extends Controller
         'email' =>'required|email|unique:employees',
         'age' => 'required',
         'phone_no' => 'required',
-        'password' => 'required|min:8'
+        'password' => 'required|min:8|confirmed'
         ]);
       
       //insert to database
@@ -31,14 +31,9 @@ class EmployeeController extends Controller
         'password' => Hash::make($fields['password'])
         ]);
       
-      //generating token  
-      $token = $employee->createToken('abc')->plainTextToken;
-      
       //return data to json
       return response()->json([
-        'message' => 'registered successfully',
-        'data' => $employee,
-        'token' => $token
+        'message' => 'registered successfully'
         ]);
     }
     
